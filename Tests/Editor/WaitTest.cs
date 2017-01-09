@@ -1,9 +1,10 @@
-﻿using System;
+﻿#if CRAZYPANDA_UNITYCORE_TESTS && CRAZYPANDA_UNITYCORE_COROUTINE
+using System;
 using System.Collections;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace CrazyPanda.UnityCore.CoroutineSystem.Tests
+namespace CrazyPanda.UnityCore.CoroutineSystem
 {
 	public class WaitTest
 	{
@@ -38,3 +39,4 @@ namespace CrazyPanda.UnityCore.CoroutineSystem.Tests
 		#endregion
 	}
 }
+#endif
