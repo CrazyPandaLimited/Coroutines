@@ -18,7 +18,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		{
 			var timeProvider = CoroutineSystemTestUtil.TestTimeProvider();
 			var coroutineMgr = new CoroutineManager( timeProvider );
-			var coroutine = coroutineMgr.StartCoroutine( this, InterruptableCoroutine() );
+			var coroutine = coroutineMgr.StartEnumeratorCoroutine( this, InterruptableCoroutine() );
 
 			var state = coroutine.State;
 			Assert.AreEqual( state, CoroutineState.NotStarted );
