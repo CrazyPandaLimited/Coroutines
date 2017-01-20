@@ -14,7 +14,8 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
         public void Test()
         {
             var timeProvider = CoroutineSystemTestUtil.TestTimeProvider();
-            var coroutineMgr = new CoroutineManager( timeProvider );
+            var coroutineMgr = new CoroutineManager();
+            coroutineMgr.TimeProvider = timeProvider;
             coroutineMgr.StartCoroutine( this, UnityWaitForSeconds() );
             Assert.Throws< UnityYieldInstructionNotSupportedException >( () => timeProvider.OnUpdate += Raise.Event< Action >() );
             Assert.Throws< UnityYieldInstructionNotSupportedException >( () => timeProvider.OnUpdate += Raise.Event< Action >() );
@@ -33,4 +34,5 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
         #endregion
     }
 }
+
 #endif

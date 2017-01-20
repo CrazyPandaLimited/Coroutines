@@ -17,8 +17,10 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		public void Test()
 		{
 			var timeProvider = CoroutineSystemTestUtil.TestTimeProvider();
-			var coroutineMgr = new CoroutineManager( timeProvider );
-			coroutineMgr.StartCoroutine( this, IgnoreCoroutine() );
+			var coroutineMgr = new CoroutineManager( );
+		    coroutineMgr.TimeProvider = timeProvider;
+
+            coroutineMgr.StartCoroutine( this, IgnoreCoroutine() );
 			for( var i = 0; i < 16; i++ )
 			{
 				timeProvider.OnUpdate += Raise.Event< Action >();
