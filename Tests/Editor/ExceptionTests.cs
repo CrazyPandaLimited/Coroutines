@@ -7,11 +7,11 @@ using UnityEngine;
 
 namespace CrazyPanda.UnityCore.CoroutineSystem
 {
-    public class UnityYieldInstructionsTest
+    public class ExceptionTests
     {
         #region Public Members
         [ Test ]
-        public void Test()
+        public void UnityYieldInstuctionNotSupported()
         {
             var timeProvider = CoroutineSystemTestUtil.TestTimeProvider();
             var coroutineMgr = new CoroutineManager();
@@ -22,6 +22,16 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             Assert.Throws< UnityYieldInstructionNotSupportedException >( () => timeProvider.OnUpdate += Raise.Event< Action >() );
             Assert.DoesNotThrow( () => timeProvider.OnUpdate += Raise.Event< Action >() );
         }
+
+	    [ Test ]
+	    public void ProcessorInYielding()
+	    {
+		    var timeProvider = CoroutineSystemTestUtil.TestTimeProvider();
+			var coroutineMgr = new CoroutineManager();
+		    coroutineMgr.TimeProvider = timeProvider;
+		    coroutineMgr.StartCoroutine( this, ProcessorCoroutine() );
+		    Assert.Throws< UsingCoroutineProcessorInYieldingException >( () => timeProvider.OnUpdate += Raise.Event< Action >() );
+	    }
         #endregion
 
         #region Private Members
@@ -31,6 +41,11 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             yield return new WaitForEndOfFrame();
             yield return new WaitForFixedUpdate();
         }
+
+	    private IEnumerator ProcessorCoroutine()
+	    {
+		    yield return Substitute.For<ICoroutineProcessor>(  );
+	    }
         #endregion
     }
 }

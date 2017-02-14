@@ -1,11 +1,13 @@
 ﻿#if CRAZYPANDA_UNITYCORE_TESTS && CRAZYPANDA_UNITYCORE_COROUTINE
 using System;
 using System.Collections;
+using System.Threading;
 using NSubstitute;
 using NUnit.Framework;
 
 namespace CrazyPanda.UnityCore.CoroutineSystem
 {
+	/* NOT VALID TESTS
     public class WeakReferenceTest
     {
         #region Private Fields
@@ -20,13 +22,14 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             new Action( () =>
             {
                 var obj = new object();
-                reference = new WeakReference( obj, true );
+                reference = new WeakReference( obj, false );
             } )();
 
             Assert.IsNotNull( reference.Target );
 
             GC.Collect();
             GC.WaitForPendingFinalizers();
+			Thread.Sleep( 100 );
 
             Assert.IsNull( reference.Target );
         }
@@ -60,6 +63,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
         }
         #endregion
     }
+	*/
 }
 
 #endif
