@@ -1,6 +1,7 @@
 ﻿#if CRAZYPANDA_UNITYCORE_TESTS && CRAZYPANDA_UNITYCORE_COROUTINE
 using System;
 using System.Collections;
+using DG.Tweening;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -19,7 +20,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             var timeProvider = CoroutineSystemTestUtil.TestTimeProvider();
             var coroutineMgr = new CoroutineManager();
             coroutineMgr.TimeProvider = timeProvider;
-            var coroutine = coroutineMgr.StartEnumeratorCoroutine( this, InterruptableCoroutine() );
+            var coroutine = (EnumeratorCoroutineProcessor) coroutineMgr.StartCoroutine( this, InterruptableCoroutine() );
 
             var state = coroutine.State;
             Assert.AreEqual( state, CoroutineState.NotStarted );
