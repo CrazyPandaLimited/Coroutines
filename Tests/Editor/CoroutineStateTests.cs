@@ -1,7 +1,6 @@
 ﻿#if CRAZYPANDA_UNITYCORE_TESTS && CRAZYPANDA_UNITYCORE_COROUTINE
 using System;
 using System.Collections;
-using DG.Tweening;
 using NSubstitute;
 using NUnit.Framework;
 
