@@ -19,9 +19,17 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 			var timeProvider = CoroutineSystemTestUtil.TestTimeProvider();
 			var coroutineMgr = new CoroutineManager();
 			coroutineMgr.TimeProvider = timeProvider;
-			
 			var coroutine = coroutineMgr.StartCoroutine( this, ParentCoroutine() );
-			
+
+			Assert.AreEqual( new[ ]
+			{
+				0,
+				0,
+				0,
+				0
+			}, _flags );
+
+			timeProvider.OnUpdate += Raise.Event< Action >();
 			Assert.AreEqual( new[ ]
 			{
 				1,
@@ -30,7 +38,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 				0
 			}, _flags );
 			Assert.IsFalse( coroutine.IsCompleted );
-			
+
 			timeProvider.OnUpdate += Raise.Event< Action >();
 			Assert.AreEqual( new[ ]
 			{

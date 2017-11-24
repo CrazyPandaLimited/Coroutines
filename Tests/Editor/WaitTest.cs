@@ -23,6 +23,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             coroutineMgr.TimeProvider = timeProvider;
             coroutineMgr.StartCoroutine( this, WaitCoroutine() );
             timeProvider.OnUpdate += Raise.Event< Action >();
+            timeProvider.OnUpdate += Raise.Event< Action >();
             Assert.IsTrue( _flag1 );
             Assert.IsFalse( _flag2 );
         }

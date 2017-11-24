@@ -16,8 +16,8 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             var timeProvider = CoroutineSystemTestUtil.TestTimeProvider();
             var coroutineMgr = new CoroutineManager();
             coroutineMgr.TimeProvider = timeProvider;
-            
-            Assert.Throws< UnityYieldInstructionNotSupportedException >( () => coroutineMgr.StartCoroutine( this, UnityWaitForSeconds() ) );
+            coroutineMgr.StartCoroutine( this, UnityWaitForSeconds() );
+            Assert.Throws< UnityYieldInstructionNotSupportedException >( () => timeProvider.OnUpdate += Raise.Event< Action >() );
             Assert.Throws< UnityYieldInstructionNotSupportedException >( () => timeProvider.OnUpdate += Raise.Event< Action >() );
             Assert.Throws< UnityYieldInstructionNotSupportedException >( () => timeProvider.OnUpdate += Raise.Event< Action >() );
             Assert.DoesNotThrow( () => timeProvider.OnUpdate += Raise.Event< Action >() );
@@ -29,7 +29,8 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		    var timeProvider = CoroutineSystemTestUtil.TestTimeProvider();
 			var coroutineMgr = new CoroutineManager();
 		    coroutineMgr.TimeProvider = timeProvider;
-		    Assert.Throws< UsingCoroutineProcessorInYieldingException >( () => coroutineMgr.StartCoroutine( this, ProcessorCoroutine() ) );
+		    coroutineMgr.StartCoroutine( this, ProcessorCoroutine() );
+		    Assert.Throws< UsingCoroutineProcessorInYieldingException >( () => timeProvider.OnUpdate += Raise.Event< Action >() );
 	    }
         #endregion
 
