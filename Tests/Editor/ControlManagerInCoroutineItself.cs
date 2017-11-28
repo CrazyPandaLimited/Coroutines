@@ -51,19 +51,19 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 
         private IEnumerator SecondEnumerator()
         {
-            yield return null;
+            yield return 0;
             _coroutineManager.StopAllCoroutinesForTarget( hook );
             _secondFlag = 1;
-            yield return null;
+            yield return 0;
             _secondFlag = 10;
         }
 
         private IEnumerator ThirdEnumerator()
         {
-            yield return null;
+            yield return 0;
             _coroutineManager.StopAllCoroutines();
             _thirdFlag = 1;
-            yield return null;
+            yield return 0;
             _thirdFlag = 10;
         }
         #endregion
