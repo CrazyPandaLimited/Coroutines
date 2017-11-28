@@ -102,19 +102,19 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 
         private IEnumerator FirstEnumerator()
         {
-            yield return 0;
+            yield return null;
             _firstFlag = true;
         }
 
         private IEnumerator SecondEnumerator()
         {
-            yield return 0;
+            yield return null;
             _secondFlag = true;
         }
 
         private IEnumerator ThirdEnumerator()
         {
-            yield return 0;
+            yield return null;
             _thirdFlag = true;
         }
         #endregion

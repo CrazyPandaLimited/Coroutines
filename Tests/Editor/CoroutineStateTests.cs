@@ -22,29 +22,29 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             var coroutine = (EnumeratorCoroutineProcessor) coroutineMgr.StartCoroutine( this, InterruptableCoroutine() );
 
             var state = coroutine.State;
-            Assert.AreEqual( state, CoroutineState.NotStarted );
+            Assert.AreEqual( CoroutineState.NotStarted, state );
             coroutine.OnStateChange += newState => state = newState;
 
             timeProvider.OnUpdate += Raise.Event< Action >();
-            Assert.AreEqual( _count, 1 );
+            Assert.AreEqual( 1, _count );
             coroutine.Pause();
-            Assert.AreEqual( state, CoroutineState.Paused );
-            Assert.AreEqual( coroutine.State, CoroutineState.Paused );
+            Assert.AreEqual( CoroutineState.Paused, state );
+            Assert.AreEqual( CoroutineState.Paused, coroutine.State );
 
             timeProvider.OnUpdate += Raise.Event< Action >();
-            Assert.AreEqual( _count, 1 );
+            Assert.AreEqual( 1, _count );
             coroutine.Resume();
-            Assert.AreEqual( state, CoroutineState.InProgress );
-            Assert.AreEqual( coroutine.State, CoroutineState.InProgress );
+            Assert.AreEqual( CoroutineState.InProgress, state );
+            Assert.AreEqual( CoroutineState.InProgress, coroutine.State );
 
             timeProvider.OnUpdate += Raise.Event< Action >();
-            Assert.AreEqual( _count, 11 );
+            Assert.AreEqual( 11, _count );
             coroutine.Stop();
-            Assert.AreEqual( state, CoroutineState.Completed );
-            Assert.AreEqual( coroutine.State, CoroutineState.Completed );
+            Assert.AreEqual( CoroutineState.Completed, state );
+            Assert.AreEqual( CoroutineState.Completed, coroutine.State );
 
             timeProvider.OnUpdate += Raise.Event< Action >();
-            Assert.AreEqual( _count, 11 );
+            Assert.AreEqual( 11, _count );
             Assert.IsTrue( coroutine.IsCompleted );
         }
         #endregion

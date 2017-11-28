@@ -3,7 +3,7 @@ using NSubstitute;
 
 namespace CrazyPanda.UnityCore.CoroutineSystem
 {
-    public class CoroutineSystemTestUtil
+    public static class CoroutineSystemTestUtil
     {
         #region Public Members
         public static ITimeProvider TestTimeProvider()
