@@ -8,11 +8,11 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 {
     public class CoroutineStateTests
     {
-        #region Private Fields
+#region Private Fields
         private int _count;
-        #endregion
+#endregion
 
-        #region Public Members
+#region Public Members
         [ Test ]
         public void Test()
         {
@@ -40,16 +40,16 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             timeProvider.OnUpdate += Raise.Event< Action >();
             Assert.AreEqual( 11, _count );
             coroutine.Stop();
-            Assert.AreEqual( CoroutineState.Completed, state );
-            Assert.AreEqual( CoroutineState.Completed, coroutine.State );
+            Assert.AreEqual( CoroutineState.Stopped, state );
+            Assert.AreEqual( CoroutineState.Stopped, coroutine.State );
 
             timeProvider.OnUpdate += Raise.Event< Action >();
             Assert.AreEqual( 11, _count );
             Assert.IsTrue( coroutine.IsCompleted );
         }
-        #endregion
+#endregion
 
-        #region Private Members
+#region Private Members
         private IEnumerator InterruptableCoroutine()
         {
             _count += 1;
@@ -58,7 +58,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             yield return null;
             _count += 100000;
         }
-        #endregion
+#endregion
     }
 }
 
