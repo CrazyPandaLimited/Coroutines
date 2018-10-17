@@ -43,30 +43,20 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 			Assert.AreEqual( new[ ]
 			{
 				1,
-				2,
-				2,
-				1
-			}, _flags );
-			Assert.IsFalse( coroutine.IsCompleted );
-
-			timeProvider.OnUpdate += Raise.Event< Action >();
-			Assert.AreEqual( new[ ]
-			{
-				1,
 				3,
 				3,
 				1
 			}, _flags );
 			Assert.IsFalse( coroutine.IsCompleted );
-
-			timeProvider.OnUpdate += Raise.Event< Action >();
-			Assert.AreEqual( new[ ]
-			{
-				2,
-				4,
-				4,
-				1
-			}, _flags );
+   
+			 timeProvider.OnUpdate += Raise.Event< Action >();
+			 Assert.AreEqual( new[ ]
+			 {
+			 	2,
+			 	4,
+			 	4,
+			 	1
+			 }, _flags );
 			Assert.IsTrue( coroutine.IsCompleted );
 		}
 		#endregion
