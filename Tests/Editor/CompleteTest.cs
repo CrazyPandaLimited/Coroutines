@@ -5,6 +5,7 @@ using System.Collections;
 using NSubstitute;
 using NUnit.Framework;
 
+
 namespace CrazyPanda.UnityCore.CoroutineSystem
 {
 	public class CompleteTest
