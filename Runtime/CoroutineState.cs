@@ -1,4 +1,3 @@
-#if CRAZYPANDA_UNITYCORE_COROUTINE
 namespace CrazyPanda.UnityCore.CoroutineSystem
 {
     public enum CoroutineState
@@ -10,4 +9,3 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
         Completed
     }
 }
-#endif

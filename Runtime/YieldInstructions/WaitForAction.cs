@@ -1,5 +1,4 @@
-﻿#if CRAZYPANDA_UNITYCORE_COROUTINE
-using System;
+﻿using System;
 using UnityEngine;
 
 public class WaitForAction : CustomYieldInstruction
@@ -89,4 +88,3 @@ public class WaitForAction<T> : CustomYieldInstruction
     }
     #endregion
 }
-#endif

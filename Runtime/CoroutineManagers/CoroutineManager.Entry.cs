@@ -1,6 +1,4 @@
-﻿#if CRAZYPANDA_UNITYCORE_COROUTINE
-
-using System;
+﻿using System;
 using System.Collections;
 using Object = UnityEngine.Object;
 
@@ -54,5 +52,3 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		}
 	}
 }
-
-#endif

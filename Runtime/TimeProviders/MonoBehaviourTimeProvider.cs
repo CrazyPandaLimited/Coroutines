@@ -1,5 +1,4 @@
-﻿#if CRAZYPANDA_UNITYCORE_COROUTINE
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace CrazyPanda.UnityCore.CoroutineSystem
@@ -70,5 +69,3 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		#endregion
 	}
 }
-
-#endif

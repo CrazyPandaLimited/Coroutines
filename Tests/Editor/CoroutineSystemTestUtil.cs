@@ -1,5 +1,4 @@
-﻿#if CRAZYPANDA_UNITYCORE_TESTS && CRAZYPANDA_UNITYCORE_COROUTINE
-using NSubstitute;
+﻿using NSubstitute;
 
 namespace CrazyPanda.UnityCore.CoroutineSystem
 {
@@ -15,5 +14,3 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
         #endregion
     }
 }
-
-#endif

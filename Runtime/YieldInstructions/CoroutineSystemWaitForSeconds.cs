@@ -1,5 +1,4 @@
-﻿#if CRAZYPANDA_UNITYCORE_COROUTINE
-namespace CrazyPanda.UnityCore.CoroutineSystem
+﻿namespace CrazyPanda.UnityCore.CoroutineSystem
 {
 	public class CoroutineSystemWaitForSeconds
 	{
@@ -15,4 +14,3 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		#endregion
 	}
 }
-#endif

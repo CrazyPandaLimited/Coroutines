@@ -1,5 +1,4 @@
-﻿#if CRAZYPANDA_UNITYCORE_TESTS && CRAZYPANDA_UNITYCORE_COROUTINE
-using System;
+﻿using System;
 using System.Collections;
 using NSubstitute;
 using NUnit.Framework;
@@ -52,5 +51,3 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
         #endregion
     }
 }
-
-#endif
