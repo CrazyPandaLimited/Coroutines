@@ -14,6 +14,9 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		#endregion
 
 		#region Properties
+		/// <summary>
+		/// Sets or returns custom time provider
+		/// </summary>
 		public ITimeProvider TimeProvider
 		{
 			get { return _timeProvider; }
@@ -35,6 +38,9 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		#endregion
 
 		#region Events
+		/// <summary>
+		/// Invokes event on any errors in coroutines execution process
+		/// </summary>
 		public event Action< object, Exception > OnError;
 		#endregion
 
@@ -54,9 +60,9 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// </summary>
 		/// <param name="target">object, where coroutine was initiated</param>
 		/// <param name="enumerator">coroutine to start</param>
-		/// <param name="handlerError">event, which gonna call on any exception in coroutine execution process</param>
+		/// <param name="handlerError">event, which is gonna call on any exception in coroutine execution process</param>
 		/// <param name="forcePutFirst">sets coroutine immediately as first priority for execution</param>
-		/// <returns>returns created coroutine</returns>
+		/// <returns>returns created CoroutineProcessor</returns>
 		/// <exception cref="NullReferenceException"></exception>
 		public ICoroutineProcessorPausable StartCoroutine( object target, IEnumerator enumerator, Action< object, Exception > handlerError = null, bool forcePutFirst = false )
 		{
@@ -86,11 +92,11 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// <summary>
 		///  starts coroutine before any another coroutine
 		/// </summary>
-		/// <param name="target">object, where coroutine was initiated</param>
+		/// <param name="target">object, for tracking coroutine</param>
 		/// <param name="enumerator">coroutine to start</param>
 		/// <param name="before">starts enumerator before it</param>
-		/// <param name="handlerError">event, which gonna call on any exception in coroutine execution process</param>
-		/// <returns>returns created coroutine</returns>
+		/// <param name="handlerError">event, which is gonna call on any exception in coroutine execution process</param>
+		/// <returns>returns created CoroutineProcessor</returns>
 		/// <exception cref="NullReferenceException"></exception>
 		/// <exception cref="ArgumentException"></exception>
 		public ICoroutineProcessorPausable StartCoroutineBefore( object target, IEnumerator enumerator, ICoroutineProcessor before, Action< object, Exception > handlerError = null )
@@ -126,11 +132,22 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 			return extendedCoroutine;
 		}
 
+		/// <summary>
+		/// Creates CoroutineProcessor from coroutine
+		/// </summary>
+		/// <param name="enumerator"></param>
+		/// <returns>returns created coroutine</returns>
 		public ICoroutineProcessorPausable CreateProcessor( IEnumerator enumerator )
 		{
 			return CreateEnumeratorCoroutine( enumerator );
 		}
 
+		/// <summary>
+		/// Execute CoroutineProcessor  immediately
+		/// </summary>
+		/// <param name="target">object, for tracking coroutine</param>
+		/// <param name="processor">CoroutineProcessor to execute</param>
+		/// <param name="handlerError">>event, which is gonna call on any exception in coroutine execution process</param>
 		public void StartProcessorImmediate( object target, ICoroutineProcessor processor, Action< object, Exception > handlerError = null )
 		{
 			try
@@ -152,6 +169,11 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 			}
 		}
 
+		/// <summary>
+		/// Stops all coroutines, tracks by this object, immediately
+		/// </summary>
+		/// <param name="target">object, which tracks coroutines</param>
+		/// <exception cref="NullReferenceException"></exception>
 		public void StopAllCoroutinesForTarget( object target )
 		{
 			if( target == null )
@@ -164,8 +186,10 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 				coroutine.CoroutineProcessor.Stop();
 			}
 		}
-
-
+		
+		/// <summary>
+		/// Stops all coroutines
+		/// </summary>
 		public void StopAllCoroutines()
 		{
 			foreach( var coroutine in _coroutines )
@@ -176,7 +200,9 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		#endregion
 
 		#region Protected Members
-		
+		/// <summary>
+		/// Stops all coroutines and clears all data
+		/// </summary>
 		public void Dispose()
 		{
 			TimeProvider = null;
@@ -271,7 +297,9 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		public static CoroutineManager Instance { get { return _instance; } }
 
 		private static CoroutineManager _instance;
-
+		/// <summary>
+		/// Returns all coroutines, stores at this manager
+		/// </summary>
 		public LinkedList< Entry > Coroutines { get { return _coroutines; } }
 #endif
 	}

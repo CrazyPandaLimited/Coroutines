@@ -14,8 +14,14 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 			#endregion
 
 			#region Properties
+			/// <summary>
+			/// Returns target, which tracks coroutine  
+			/// </summary>
 			public object Target { get { return _targetReference.Target; } }
 
+			/// <summary>
+			/// Returns coroutine alive state
+			/// </summary>
 			public bool IsAlive
 			{
 				get
@@ -34,8 +40,17 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 				}
 			}
 
-			public Action< object, Exception > HandlerError { get; private set; }
-			public IEnumerator Enumerator { get; private set; }
+			/// <summary>
+			/// Invokes on any errors, during coroutines execution process
+			/// </summary>
+			public Action< object, Exception > HandlerError { get; }
+			/// <summary>
+			/// Returns current coroutine
+			/// </summary>
+			public IEnumerator Enumerator { get; }
+			/// <summary>
+			/// Returns current CoroutineProcessor, which controls coroutine execution process
+			/// </summary>
 			public EnumeratorCoroutineProcessor CoroutineProcessor { get; private set; }
 			#endregion
 
@@ -44,9 +59,9 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 			{
 				_isUnityObject = target is Object;
 				_targetReference = new WeakReference( target );
-				Enumerator = enumerator;
-				CoroutineProcessor = coroutineProcessor;
-				HandlerError = handlerError;
+				Enumerator = enumerator ?? throw new ArgumentException(nameof(enumerator));
+				CoroutineProcessor = coroutineProcessor ?? throw new ArgumentException(nameof(coroutineProcessor));
+				HandlerError = handlerError ?? throw new ArgumentException(nameof(handlerError));
 			}
 			#endregion
 		}
