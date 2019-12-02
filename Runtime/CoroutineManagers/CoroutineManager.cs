@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace CrazyPanda.UnityCore.CoroutineSystem
 {
@@ -48,6 +49,15 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		#endregion
 
 		#region Public Members
+		/// <summary>
+		///  starts coroutine in near future, by adding it to execution queue
+		/// </summary>
+		/// <param name="target">object, where coroutine was initiated</param>
+		/// <param name="enumerator">coroutine to start</param>
+		/// <param name="handlerError">event, which gonna call on any exception in coroutine execution process</param>
+		/// <param name="forcePutFirst">sets coroutine immediately as first priority for execution</param>
+		/// <returns>returns created coroutine</returns>
+		/// <exception cref="NullReferenceException"></exception>
 		public ICoroutineProcessorPausable StartCoroutine( object target, IEnumerator enumerator, Action< object, Exception > handlerError = null, bool forcePutFirst = false )
 		{
 			if( _timeProvider == null )
@@ -73,6 +83,16 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 			return extendedCoroutine;
 		}
 
+		/// <summary>
+		///  starts coroutine before any another coroutine
+		/// </summary>
+		/// <param name="target">object, where coroutine was initiated</param>
+		/// <param name="enumerator">coroutine to start</param>
+		/// <param name="before">starts enumerator before it</param>
+		/// <param name="handlerError">event, which gonna call on any exception in coroutine execution process</param>
+		/// <returns>returns created coroutine</returns>
+		/// <exception cref="NullReferenceException"></exception>
+		/// <exception cref="ArgumentException"></exception>
 		public ICoroutineProcessorPausable StartCoroutineBefore( object target, IEnumerator enumerator, ICoroutineProcessor before, Action< object, Exception > handlerError = null )
 		{
 			if( _timeProvider == null )
@@ -225,6 +245,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 			}
 			catch( Exception ex )
 			{
+				Debug.LogException( ex );
 				entry.CoroutineProcessor.Stop();
 				entry.CoroutineProcessor.Exception = ex;
 
