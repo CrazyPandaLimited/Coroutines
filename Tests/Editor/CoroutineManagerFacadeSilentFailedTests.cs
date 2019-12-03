@@ -10,7 +10,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
         private ICoroutineManager _coroutineManager;
 
         [ SetUp ]
-        public void Initialize() => _coroutineManager = new CoroutineManagerFacade( new FlogsManagerV2( new FlogsConfig( "no", "" ), new UnityHttpConnection( new HttpSettings() ) ) );
+        public void Initialize() => _coroutineManager = new CoroutineManagerFacade( new FlogsManagerV2( new FlogsConfig( "no", "test" ), new UnityHttpConnection( new HttpSettings() ) ) );
 
         [ Test ]
         public void CreateProcessorFailedSilentOnNullValuesTest() => Assert.DoesNotThrow( () => _coroutineManager.CreateProcessor( null ) );
