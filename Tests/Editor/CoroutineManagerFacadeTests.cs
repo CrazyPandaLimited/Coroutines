@@ -15,7 +15,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
         public void Initialize()
         {
             _flogsManager = new FlogsManagerV2( new FlogsConfig( "no", "test" ), new UnityHttpConnection( new HttpSettings() ) );
-            _coroutineManager = new CoroutineManagerFacade( _flogsManager );
+            _coroutineManager = new CoroutineManagerFacade( _flogsManager,timeProvider: CoroutineSystemTestUtil.TestTimeProvider() );
         }
 
         [ UnityTest ]
