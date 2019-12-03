@@ -64,7 +64,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// <param name="forcePutFirst">sets coroutine immediately as first priority for execution</param>
 		/// <returns>returns created CoroutineProcessor</returns>
 		/// <exception cref="ArgumentNullException"></exception>
-		public ICoroutineProcessorPausable StartCoroutine( object target, IEnumerator enumerator, Action< object, Exception > handlerError = null, bool forcePutFirst = false )
+		public virtual ICoroutineProcessorPausable StartCoroutine( object target, IEnumerator enumerator, Action< object, Exception > handlerError = null, bool forcePutFirst = false )
 		{
 			CheckCommonValuesForNullState(target);
 			var extendedCoroutine = CreateEnumeratorCoroutine( enumerator );
@@ -89,7 +89,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// <param name="handlerError">event, which is gonna call on any exception in coroutine execution process</param>
 		/// <returns>returns created CoroutineProcessor</returns>
 		/// <exception cref="ArgumentException"></exception>
-		public ICoroutineProcessorPausable StartCoroutineBefore( object target, IEnumerator enumerator, ICoroutineProcessor before, Action< object, Exception > handlerError = null )
+		public virtual ICoroutineProcessorPausable StartCoroutineBefore( object target, IEnumerator enumerator, ICoroutineProcessor before, Action< object, Exception > handlerError = null )
 		{
 			CheckCommonValuesForNullState(target);
 
@@ -119,7 +119,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// </summary>
 		/// <param name="enumerator"></param>
 		/// <returns>returns created coroutine</returns>
-		public ICoroutineProcessorPausable CreateProcessor( IEnumerator enumerator )
+		public virtual ICoroutineProcessorPausable CreateProcessor( IEnumerator enumerator )
 		{
 			return CreateEnumeratorCoroutine( enumerator );
 		}
@@ -130,7 +130,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// <param name="target">object, for tracking coroutine</param>
 		/// <param name="processor">CoroutineProcessor to execute</param>
 		/// <param name="handlerError">>event, which is gonna call on any exception in coroutine execution process</param>
-		public void StartProcessorImmediate( object target, ICoroutineProcessor processor, Action< object, Exception > handlerError = null )
+		public virtual void StartProcessorImmediate( object target, ICoroutineProcessor processor, Action< object, Exception > handlerError = null )
 		{
 			try
 			{
@@ -156,7 +156,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// </summary>
 		/// <param name="target">object, which tracks coroutines</param>
 		/// <exception cref="ArgumentNullException"></exception>
-		public void StopAllCoroutinesForTarget( object target )
+		public virtual void StopAllCoroutinesForTarget( object target )
 		{
 			if( target == null )
 			{
@@ -172,7 +172,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// <summary>
 		/// Stops all coroutines
 		/// </summary>
-		public void StopAllCoroutines()
+		public virtual void StopAllCoroutines()
 		{
 			foreach( var coroutine in _coroutines )
 			{
@@ -245,7 +245,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 			return currentNode;
 		}
 
-		private void UpdateEntry( Entry entry )
+		protected virtual void UpdateEntry( Entry entry )
 		{
 			try
 			{
@@ -255,6 +255,8 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 			{
 				entry.CoroutineProcessor.Stop();
 				entry.CoroutineProcessor.Exception = ex;
+
+				Debug.LogException( ex );
 
 				if( entry.HandlerError != null )
 				{
