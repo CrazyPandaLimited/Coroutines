@@ -6,8 +6,9 @@ using CrazyPanda.UnityCore.Network.HttpSystem;
 namespace CrazyPanda.UnityCore.CoroutineSystem
 {
     /// <summary>
-    /// Facade on coroutineManager
-    /// Provides coroutineManager methods calling without without exceptions
+    /// Facade for coroutineManager
+    /// Provides coroutineManager methods calling without exceptions
+    /// Only constructors can throw exceptions
     /// </summary>
     public sealed class CoroutineManagerFacade : ICoroutineManager
     {
@@ -20,12 +21,14 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
         #endregion
 
         #region Constructors
-        public CoroutineManagerFacade() : this( new FlogsManagerV2( new FlogsConfig( FlogsConsts.FLOGS_PRODUCTION_ENDPOINT, ProjectName ), new UnityHttpConnection( new HttpSettings() ) ) )
+        public CoroutineManagerFacade( ITimeProvider timeProvider = null ) : this( new FlogsManagerV2( new FlogsConfig( FlogsConsts.FLOGS_PRODUCTION_ENDPOINT, ProjectName ), new UnityHttpConnection( new HttpSettings() ) ), timeProvider )
         {
         }
 
         public CoroutineManagerFacade( ICoroutineManager coroutineManager ) => _coroutineManager = coroutineManager ?? throw new ArgumentNullException( nameof(coroutineManager) );
-        public CoroutineManagerFacade( IFlogsManager flogsManager ) => _coroutineManager = new CoroutineManagerExceptionsLogProxy( flogsManager );
+
+        public CoroutineManagerFacade( IFlogsManager flogsManager, ITimeProvider timeProvider = null ) =>
+            _coroutineManager = new CoroutineManagerExceptionsLogProxy( flogsManager ) { TimeProvider = timeProvider };
         #endregion
 
         #region Public Properties
