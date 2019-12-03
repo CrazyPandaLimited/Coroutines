@@ -255,9 +255,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 			{
 				entry.CoroutineProcessor.Stop();
 				entry.CoroutineProcessor.Exception = ex;
-
-				Debug.LogException( ex );
-
+				
 				if( entry.HandlerError != null )
 				{
 					entry.HandlerError.Invoke( entry.Target, ex );
