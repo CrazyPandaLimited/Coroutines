@@ -16,6 +16,9 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		#endregion
 
 		#region Properties
+		/// <summary>
+		/// Returns current coroutine execution process state
+		/// </summary>
 		public CoroutineState State
 		{
 			get { return _state; }
@@ -45,19 +48,26 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		#endregion
 
 		#region Events
+		/// <summary>
+		/// Event, which is gonna invoke after every coroutine execution process state changes
+		/// </summary>
 		public event Action< CoroutineState > OnStateChange;
 		#endregion
 
 		#region Constructors
 		public EnumeratorCoroutineProcessor( ITimeProvider timeProvider, IEnumerator enumerator )
 		{
-			_timeProvider = timeProvider;
+			_timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
+			_enumerator = enumerator ?? throw new ArgumentNullException(nameof(enumerator));
 			_state = CoroutineState.NotStarted;
-			_enumerator = enumerator;
 		}
 		#endregion
 
 		#region Public Members
+		/// <summary>
+		/// Suspends coroutine execution process
+		/// </summary>
+		/// <exception cref="CoroutineWrongStateException"></exception>
 		public void Pause()
 		{
 			if( IsCompleted )
@@ -68,6 +78,10 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 			State = CoroutineState.Paused;
 		}
 
+		/// <summary>
+		/// Continues coroutine execution process
+		/// </summary>
+		/// <exception cref="CoroutineWrongStateException"></exception>
 		public void Resume()
 		{
 			if( IsCompleted )
@@ -83,6 +97,11 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 			State = CoroutineState.Stopped;
 		}
 
+		/// <summary>
+		/// Updates coroutine execution process
+		/// </summary>
+		/// <exception cref="UnityYieldInstructionNotSupportedException"></exception>
+		/// <exception cref="UsingCoroutineProcessorInYieldingException"></exception>
 		public void Update()
 		{
 			int loopCount = 0;

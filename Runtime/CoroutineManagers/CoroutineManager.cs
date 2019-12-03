@@ -63,19 +63,10 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// <param name="handlerError">event, which is gonna call on any exception in coroutine execution process</param>
 		/// <param name="forcePutFirst">sets coroutine immediately as first priority for execution</param>
 		/// <returns>returns created CoroutineProcessor</returns>
-		/// <exception cref="NullReferenceException"></exception>
+		/// <exception cref="ArgumentNullException"></exception>
 		public ICoroutineProcessorPausable StartCoroutine( object target, IEnumerator enumerator, Action< object, Exception > handlerError = null, bool forcePutFirst = false )
 		{
-			if( _timeProvider == null )
-			{
-				throw new NullReferenceException( "TimeProvider" );
-			}
-
-			if( target == null )
-			{
-				throw new NullReferenceException( "parameter 'target'" );
-			}
-
+			CheckCommonValuesForNullState(target);
 			var extendedCoroutine = CreateEnumeratorCoroutine( enumerator );
 			var entry = new Entry( target, enumerator, extendedCoroutine, handlerError );
 			if( forcePutFirst )
@@ -90,26 +81,17 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		}
 
 		/// <summary>
-		///  starts coroutine before any another coroutine
+		///  Starts coroutine before any another coroutine
 		/// </summary>
 		/// <param name="target">object, for tracking coroutine</param>
 		/// <param name="enumerator">coroutine to start</param>
 		/// <param name="before">starts enumerator before it</param>
 		/// <param name="handlerError">event, which is gonna call on any exception in coroutine execution process</param>
 		/// <returns>returns created CoroutineProcessor</returns>
-		/// <exception cref="NullReferenceException"></exception>
 		/// <exception cref="ArgumentException"></exception>
 		public ICoroutineProcessorPausable StartCoroutineBefore( object target, IEnumerator enumerator, ICoroutineProcessor before, Action< object, Exception > handlerError = null )
 		{
-			if( _timeProvider == null )
-			{
-				throw new NullReferenceException( "TimeProvider" );
-			}
-
-			if( target == null )
-			{
-				throw new NullReferenceException( "parameter 'target'" );
-			}
+			CheckCommonValuesForNullState(target);
 
 			var extendedCoroutine = CreateEnumeratorCoroutine( enumerator );
 
@@ -125,7 +107,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 
 			if( beforeNode == null )
 			{
-				throw new ArgumentException( "There's no such element in coroutines list", "before" );
+				throw new ArgumentNullException(nameof(beforeNode));
 			}
 
 			_coroutines.AddBefore( beforeNode, new Entry( target, enumerator, extendedCoroutine, handlerError ) );
@@ -143,7 +125,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		}
 
 		/// <summary>
-		/// Execute CoroutineProcessor  immediately
+		/// Executes CoroutineProcessor  immediately
 		/// </summary>
 		/// <param name="target">object, for tracking coroutine</param>
 		/// <param name="processor">CoroutineProcessor to execute</param>
@@ -173,12 +155,12 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// Stops all coroutines, tracks by this object, immediately
 		/// </summary>
 		/// <param name="target">object, which tracks coroutines</param>
-		/// <exception cref="NullReferenceException"></exception>
+		/// <exception cref="ArgumentNullException"></exception>
 		public void StopAllCoroutinesForTarget( object target )
 		{
 			if( target == null )
 			{
-				throw new NullReferenceException();
+				throw new ArgumentNullException(nameof(target));
 			}
 
 			foreach( var coroutine in _coroutines.Where( c => c.Target == target ) )
@@ -216,7 +198,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		{
 			if( enumerator == null )
 			{
-				throw new NullReferenceException( "parameter 'enumerator'" );
+				throw new ArgumentNullException(nameof(enumerator));
 			}
 
 			if( _coroutines.Any( v => v.Enumerator == enumerator ) )
@@ -289,6 +271,20 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 				}
 			}
 		}
+
+		private void CheckCommonValuesForNullState(object target)
+		{
+			if( _timeProvider == null )
+			{
+				throw new ArgumentNullException(nameof(_timeProvider));
+			}
+
+			if( target == null )
+			{
+				throw new ArgumentNullException(nameof(target));
+			}
+		}
+		
 		#endregion
 
 #if UNITY_EDITOR

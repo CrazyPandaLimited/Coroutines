@@ -8,6 +8,9 @@ public class WaitForAction : CustomYieldInstruction
     #endregion
 
     #region Properties
+    /// <summary>
+    /// Returns state, which provides info about invokes target event or not
+    /// </summary>
     public bool Dispatched { get; private set; }
 
     public override bool keepWaiting { get { return !Dispatched; } }
@@ -60,16 +63,9 @@ public class WaitForAction<T> : CustomYieldInstruction
     #region Constructors
     public WaitForAction( Action<T> action )
     {
-        if( action != null )
-        {
-            _eventInstance = action;
-            Dispatched = false;
-            _eventInstance += HandleInvokeEvent;
-        }
-        else
-        {
-            throw new Exception( string.Format( "Instruction: {0}, event can not be null", action ) );
-        }
+        _eventInstance = action ?? throw new ArgumentNullException(nameof(action));
+        Dispatched = false;
+        _eventInstance += HandleInvokeEvent;
     }
     #endregion
 

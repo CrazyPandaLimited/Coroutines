@@ -3,14 +3,14 @@
 	public class CoroutineSystemWaitForSeconds
 	{
 		#region Properties
-		public double Seconds { get; private set; }
+		/// <summary>
+		/// Returns time to await in seconds
+		/// </summary>
+		public double Seconds { get; }
 		#endregion
 
 		#region Constructors
-		public CoroutineSystemWaitForSeconds( double seconds )
-		{
-			Seconds = seconds;
-		}
+		public CoroutineSystemWaitForSeconds( double seconds ) => Seconds = seconds;
 		#endregion
 	}
 }

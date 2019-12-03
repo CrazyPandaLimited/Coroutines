@@ -14,6 +14,9 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		#endregion
 
 		#region Properties
+		/// <summary>
+		/// Creates or returns MonoBehaviourTimeProvider single instance
+		/// </summary>
 		public static MonoBehaviourTimeProvider Instance
 		{
 			get
@@ -33,6 +36,9 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 			}
 		}
 
+		/// <summary>
+		/// Returns current time
+		/// </summary>
 		public float deltaTime
 		{
 			get { return Time.deltaTime; }
@@ -40,11 +46,20 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		#endregion
 
 		#region Events
+		/// <summary>
+		/// Event, which invokes on any error happened during updated time tick process
+		/// </summary>
 		public event Action< object, Exception > OnError;
+		/// <summary>
+		/// Event, which invokes on every tick updated
+		/// </summary>
 		public event Action OnUpdate;
 		#endregion
 
 		#region Public Members
+		/// <summary>
+		/// Updates time tick
+		/// </summary>
 		public void Update()
 		{
 			try

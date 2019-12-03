@@ -36,7 +36,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		#region Constructors
 		public AsyncOperationProcessor( AsyncOperation asyncOperation )
 		{
-			_asyncOperation = asyncOperation;
+			_asyncOperation = asyncOperation ?? throw new ArgumentNullException(nameof(asyncOperation));
 			_isComplete = _asyncOperation.isDone;
 			if( _isComplete && OnComplete != null )
 			{

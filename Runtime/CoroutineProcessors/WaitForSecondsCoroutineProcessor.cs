@@ -31,7 +31,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
         #region Constructors
         public WaitForSecondsCoroutineProcessor( ITimeProvider timeProvider, double timer )
         {
-            _timeProvider = timeProvider;
+            _timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
             _currentTimer = timer;
         }
         #endregion

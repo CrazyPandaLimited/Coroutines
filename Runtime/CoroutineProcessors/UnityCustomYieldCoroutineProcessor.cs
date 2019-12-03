@@ -34,7 +34,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
         #region Constructors
         public UnityCustomYieldCoroutineProcessor( CustomYieldInstruction customInstruction )
         {
-            _customInstruction = customInstruction;
+            _customInstruction = customInstruction ?? throw new ArgumentNullException(nameof(customInstruction));
 	        _isComplete = !_customInstruction.keepWaiting;
 			if (_isComplete && OnComplete != null)
 			{

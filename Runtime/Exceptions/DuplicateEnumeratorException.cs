@@ -6,18 +6,21 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
     public class DuplicateEnumeratorException : Exception
     {
         #region Properties
-        public IEnumerator Enumerator { get; private set; }
+        /// <summary>
+        /// Returns current coroutine
+        /// </summary>
+        public IEnumerator Enumerator { get; }
         #endregion
 
         #region Constructors
         public DuplicateEnumeratorException( IEnumerator enumerator ) : base( "Can't add same enumerator twice" )
         {
-            Enumerator = enumerator;
+            Enumerator = enumerator ?? throw new ArgumentNullException(nameof(enumerator));
         }
 
         public DuplicateEnumeratorException( IEnumerator enumerator, Exception innerException ) : base( "Can't add same enumerator twice", innerException )
         {
-            Enumerator = enumerator;
+            Enumerator = enumerator ?? throw new ArgumentNullException(nameof(enumerator));
         }
         #endregion
     }
