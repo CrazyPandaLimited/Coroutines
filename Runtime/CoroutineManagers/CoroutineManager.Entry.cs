@@ -61,7 +61,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 				_targetReference = new WeakReference( target );
 				Enumerator = enumerator ?? throw new ArgumentException(nameof(enumerator));
 				CoroutineProcessor = coroutineProcessor ?? throw new ArgumentException(nameof(coroutineProcessor));
-				HandlerError = handlerError ?? throw new ArgumentException(nameof(handlerError));
+				HandlerError = handlerError;
 			}
 			#endregion
 		}

@@ -14,9 +14,9 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             var timeProvider = CoroutineSystemTestUtil.TestTimeProvider();
             var coroutineMgr = new CoroutineManager();
             coroutineMgr.TimeProvider = timeProvider;
-            Assert.Throws< NullReferenceException >( () => coroutineMgr.StartCoroutine( null, SimpleCoroutine() ) );
-            Assert.Throws< NullReferenceException >( () => coroutineMgr.StartCoroutine( this, null ) );
-            Assert.Throws< NullReferenceException >( () => coroutineMgr.StopAllCoroutinesForTarget( null ) );
+            Assert.Throws< ArgumentNullException >( () => coroutineMgr.StartCoroutine( null, SimpleCoroutine() ) );
+            Assert.Throws< ArgumentNullException >( () => coroutineMgr.StartCoroutine( this, null ) );
+            Assert.Throws< ArgumentNullException >( () => coroutineMgr.StopAllCoroutinesForTarget( null ) );
         }
 
         [ Test ]

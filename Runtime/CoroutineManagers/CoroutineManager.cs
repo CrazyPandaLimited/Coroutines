@@ -253,7 +253,6 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 			}
 			catch( Exception ex )
 			{
-				Debug.LogException( ex );
 				entry.CoroutineProcessor.Stop();
 				entry.CoroutineProcessor.Exception = ex;
 
