@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 
 namespace CrazyPanda.UnityCore.CoroutineSystem
 {
-	public interface ICoroutineManager
+	public interface ICoroutineManager : IDisposable
 	{
 		#region Properties
 		/// <summary>

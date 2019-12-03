@@ -87,7 +87,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// <param name="before">starts enumerator before it</param>
 		/// <param name="handlerError">event, which is gonna call on any exception in coroutine execution process</param>
 		/// <returns>returns created CoroutineProcessor</returns>
-		/// <exception cref="ArgumentException"></exception>
+		/// <exception cref="ArgumentNullException"></exception>
 		public virtual ICoroutineProcessorPausable StartCoroutineBefore( object target, IEnumerator enumerator, ICoroutineProcessor before, Action< object, Exception > handlerError = null )
 		{
 			CheckCommonValuesForNullState(target);
@@ -129,8 +129,19 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// <param name="target">object, for tracking coroutine</param>
 		/// <param name="processor">CoroutineProcessor to execute</param>
 		/// <param name="handlerError">>event, which is gonna call on any exception in coroutine execution process</param>
+		/// <exception cref="ArgumentNullException"></exception>
 		public virtual void StartProcessorImmediate( object target, ICoroutineProcessor processor, Action< object, Exception > handlerError = null )
 		{
+			if( target == null )
+			{
+				throw new ArgumentNullException(nameof(target));
+			}
+
+			if( processor == null )
+			{
+				throw  new ArgumentNullException(nameof(processor));
+			}
+			
 			try
 			{
 				while( !processor.IsCompleted )
@@ -184,7 +195,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// <summary>
 		/// Stops all coroutines and clears all data
 		/// </summary>
-		public void Dispose()
+		public virtual void Dispose()
 		{
 			TimeProvider = null;
 			OnError = null;

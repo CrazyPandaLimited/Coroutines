@@ -32,6 +32,8 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
         public override void StopAllCoroutinesForTarget( object target ) => ExecuteEventSafely( () => base.StopAllCoroutinesForTarget( target ) );
 
         public override void StopAllCoroutines() => ExecuteEventSafely( () => base.StopAllCoroutines() );
+
+        public override void Dispose() => ExecuteEventSafely( () => base.Dispose() );
         #endregion
 
         #region Protected Members

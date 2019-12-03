@@ -42,6 +42,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             add => _coroutineManager.OnError += value;
             remove => _coroutineManager.OnError -= value;
         }
+
         #endregion
 
         #region Public Members
@@ -58,6 +59,9 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
         public void StopAllCoroutinesForTarget( object target ) => _coroutineManager.StopAllCoroutinesForTarget( target );
 
         public void StopAllCoroutines() => _coroutineManager.StopAllCoroutines();
+        
+        public void Dispose() => _coroutineManager.Dispose();
+        
         #endregion
     }
 }
