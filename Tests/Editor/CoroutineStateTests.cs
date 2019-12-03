@@ -13,10 +13,10 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 
 #region Public Members
         [ Test ]
-        public void Test()
+        public void Test() => CoroutineRunTest( new CoroutineManager() );
+        public void CoroutineRunTest(ICoroutineManager coroutineMgr)
         {
             var timeProvider = CoroutineSystemTestUtil.TestTimeProvider();
-            var coroutineMgr = new CoroutineManager();
             coroutineMgr.TimeProvider = timeProvider;
             var coroutine = (EnumeratorCoroutineProcessor) coroutineMgr.StartCoroutine( this, InterruptableCoroutine() );
 
@@ -46,6 +46,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             Assert.AreEqual( 11, _count );
             Assert.IsTrue( coroutine.IsCompleted );
         }
+
 #endregion
 
 #region Private Members

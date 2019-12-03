@@ -2,6 +2,7 @@ using System.Collections;
 using CrazyPanda.UnityCore.Flogs;
 using CrazyPanda.UnityCore.Network.HttpSystem;
 using NUnit.Framework;
+using UnityEngine;
 using UnityEngine.TestTools;
 
 namespace CrazyPanda.UnityCore.CoroutineSystem
@@ -34,6 +35,13 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             Assert.IsTrue( logSended );
         }
 
+        [ Test ]
+        public void CoroutineStartWithoutErrorsTest()
+        {
+            var testsManager = new CoroutineStateTests();
+            testsManager.CoroutineRunTest( _coroutineManager );
+        }
+        
         [ Test ]
         public void CreateProcessorFailedSilentOnNullValuesTest() => Assert.DoesNotThrow( () => _coroutineManager.CreateProcessor( null ) );
 
