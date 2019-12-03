@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using JetBrains.Annotations;
 
 namespace CrazyPanda.UnityCore.CoroutineSystem
 {
@@ -27,6 +28,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// <param name="enumerator">coroutine to start</param>
 		/// <param name="handlerError">event, which is gonna call on any exception in coroutine execution process</param>
 		/// <param name="forcePutFirst">sets coroutine immediately as first priority for execution</param>
+		[CanBeNull]
 		ICoroutineProcessorPausable StartCoroutine( object target, IEnumerator enumerator, Action< object, Exception > handlerError = null, bool forcePutFirst = false );
 		/// <summary>
 		///  Starts coroutine before any another coroutine
@@ -36,12 +38,14 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// <param name="before">starts enumerator before it</param>
 		/// <param name="handlerError">event, which is gonna call on any exception in coroutine execution process</param>
 		/// <returns>returns created CoroutineProcessor</returns>
+		[CanBeNull]
 		ICoroutineProcessorPausable StartCoroutineBefore( object target, IEnumerator enumerator, ICoroutineProcessor before, Action< object, Exception > handlerError = null );
 		/// <summary>
 		/// Creates CoroutineProcessor from coroutine
 		/// </summary>
 		/// <param name="enumerator"></param>
 		/// <returns>returns created coroutine</returns>
+		[CanBeNull]
 		ICoroutineProcessorPausable CreateProcessor( IEnumerator enumerator );
 		/// <summary>
 		/// Executes CoroutineProcessor  immediately
