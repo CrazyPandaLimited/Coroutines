@@ -13,7 +13,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
     public sealed class CoroutineManagerFacade : ICoroutineManager
     {
         #region Consts
-        private static readonly string _projectName = UnityEngine.Application.productName;
+        private static readonly string _defaultProjectName = UnityEngine.Application.productName;
         #endregion
 
         #region Private Fields
@@ -21,7 +21,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
         #endregion
 
         #region Constructors
-        public CoroutineManagerFacade( ITimeProvider timeProvider = null ) : this( new FlogsManagerV2( new FlogsConfig( FlogsConsts.FLOGS_PRODUCTION_ENDPOINT, ProjectName ), new UnityHttpConnection( new HttpSettings() ) ), timeProvider )
+        public CoroutineManagerFacade( ITimeProvider timeProvider = null ) : this( new FlogsManagerV2( new FlogsConfig( FlogsConsts.FLOGS_PRODUCTION_ENDPOINT, _defaultProjectName ), new UnityHttpConnection( new HttpSettings() ) ), timeProvider )
         {
         }
 
