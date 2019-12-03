@@ -1,5 +1,6 @@
-using System;
 using System.Collections;
+using CrazyPanda.UnityCore.Flogs;
+using CrazyPanda.UnityCore.Network.HttpSystem;
 using NUnit.Framework;
 
 namespace CrazyPanda.UnityCore.CoroutineSystem
@@ -9,7 +10,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
         private ICoroutineManager _coroutineManager;
 
         [ SetUp ]
-        public void Initialize() => _coroutineManager = new CoroutineManagerFacade();
+        public void Initialize() => _coroutineManager = new CoroutineManagerFacade( new FlogsManagerV2( new FlogsConfig( "no", "" ), new UnityHttpConnection( new HttpSettings() ) ) );
 
         [ Test ]
         public void CreateProcessorFailedSilentOnNullValuesTest() => Assert.DoesNotThrow( () => _coroutineManager.CreateProcessor( null ) );
@@ -31,7 +32,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 
         [ Test ]
         public void TestEnumeratorDisposeFailedSilentTest() => Assert.DoesNotThrow( () => _coroutineManager.Dispose() );
-        
+
         [ Test ]
         public void StopCoroutinesForTargetFailedSilentAfterStartingTest()
         {
