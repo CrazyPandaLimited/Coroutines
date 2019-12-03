@@ -13,7 +13,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
     public sealed class CoroutineManagerFacade : ICoroutineManager
     {
         #region Consts
-        private const string ProjectName = "coroutines";
+        private static readonly string _projectName = UnityEngine.Application.productName;
         #endregion
 
         #region Private Fields
