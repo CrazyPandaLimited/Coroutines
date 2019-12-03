@@ -4,16 +4,12 @@ using NUnit.Framework;
 
 namespace CrazyPanda.UnityCore.CoroutineSystem
 {
-    public sealed class CoroutineManagerFacadeFailedWithExceptionsTests
+    public sealed class CoroutineManagerFailedWithExceptionsTests
     {
         private ICoroutineManager _coroutineManager;
 
         [ SetUp ]
-        public void Initialize()
-        {
-            var manager = new CoroutineManager { TimeProvider = CoroutineSystemTestUtil.TestTimeProvider() };
-            _coroutineManager = new CoroutineManagerFacade( manager );
-        }
+        public void Initialize() => _coroutineManager = new CoroutineManager { TimeProvider = CoroutineSystemTestUtil.TestTimeProvider()};
 
         [ Test ]
         public void CreateProcessorFailedTest() => Assert.Throws< ArgumentNullException >( () => _coroutineManager.CreateProcessor( null ) );
