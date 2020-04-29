@@ -4,6 +4,8 @@ using NUnit.Framework;
 
 namespace CrazyPanda.UnityCore.CoroutineSystem
 {
+    [NUnit.Framework.Category("IntegrationTests")]
+    [NUnit.Framework.Category("LocalTests")]
     public sealed class CoroutineManagerFailedWithExceptionsTests
     {
         private ICoroutineManager _coroutineManager;

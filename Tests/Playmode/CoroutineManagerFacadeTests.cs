@@ -7,6 +7,8 @@ using UnityEngine.TestTools;
 
 namespace CrazyPanda.UnityCore.CoroutineSystem
 {
+    [NUnit.Framework.Category("IntegrationTests")]
+    [NUnit.Framework.Category("LocalTests")]
     public sealed class CoroutineManagerFacadeTests
     {
         private IFlogsManager _flogsManager;
