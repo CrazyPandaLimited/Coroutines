@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CrazyPanda.UnityCore.CoroutineSystem
@@ -55,11 +56,11 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		#endregion
 
 		#region Constructors
-		public EnumeratorCoroutineProcessor( ITimeProvider timeProvider, IEnumerator enumerator )
+		public EnumeratorCoroutineProcessor( ITimeProvider timeProvider, IEnumerator enumerator)
 		{
 			_timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
 			_enumerator = enumerator ?? throw new ArgumentNullException(nameof(enumerator));
-			_state = CoroutineState.NotStarted;
+            _state = CoroutineState.NotStarted;
 		}
 		#endregion
 
@@ -102,7 +103,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// </summary>
 		/// <exception cref="UnityYieldInstructionNotSupportedException"></exception>
 		/// <exception cref="UsingCoroutineProcessorInYieldingException"></exception>
-		public void Update()
+		public virtual void Update()
 		{
 			int loopCount = 0;
 			while( true )
@@ -134,37 +135,8 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 				}
 
 				if( _enumerator.MoveNext() )
-				{
-					var current = _enumerator.Current;
-					if( current is CoroutineSystemWaitForSeconds )
-					{
-						float a = loopCount > 0 ? _timeProvider.deltaTime : 0f;
-						_innerCoroutineProcessor = new WaitForSecondsCoroutineProcessor( _timeProvider, ( ( CoroutineSystemWaitForSeconds ) current ).Seconds + a );
-					}
-					else if( current is CustomYieldInstruction )
-					{
-						_innerCoroutineProcessor = new UnityCustomYieldCoroutineProcessor( ( CustomYieldInstruction ) current );
-					}
-					else if( current is IEnumerator )
-					{
-						_innerCoroutineProcessor = new EnumeratorCoroutineProcessor( _timeProvider, ( IEnumerator ) current );
-					}
-					else if( current is AsyncOperation )
-					{
-						_innerCoroutineProcessor = new AsyncOperationProcessor( ( AsyncOperation ) current );
-					}
-					else if( current is WaitForSeconds )
-					{
-						throw new UnityYieldInstructionNotSupportedException( ( YieldInstruction ) current, typeof( CoroutineSystemWaitForSeconds ) );
-					}
-					else if( current is YieldInstruction )
-					{
-						throw new UnityYieldInstructionNotSupportedException( ( YieldInstruction ) current );
-					}
-					else if( current is ICoroutineProcessor )
-					{
-						throw new UsingCoroutineProcessorInYieldingException();
-					}
+				{					
+                    _innerCoroutineProcessor = CoroutineProcessorFactory( _enumerator.Current, loopCount);                    
 
 					if( _innerCoroutineProcessor != null )
 					{
@@ -186,6 +158,42 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 				break;
 			}
 		}
-		#endregion
-	}
+
+        protected virtual ICoroutineProcessor CoroutineProcessorFactory( object current, int loopCount )
+        {
+            ICoroutineProcessor res = null;
+            if( current is CoroutineSystemWaitForSeconds )
+            {
+                float a = loopCount > 0 ? _timeProvider.deltaTime : 0f;
+                res = new WaitForSecondsCoroutineProcessor( _timeProvider, (( CoroutineSystemWaitForSeconds )current).Seconds + a );
+            }
+            else if( current is CustomYieldInstruction )
+            {
+                res = new UnityCustomYieldCoroutineProcessor( ( CustomYieldInstruction )current );
+            }
+            else if( current is IEnumerator )
+            {
+                res = new EnumeratorCoroutineProcessor( _timeProvider, ( IEnumerator )current );
+            }
+            else if( current is AsyncOperation )
+            {
+                res = new AsyncOperationProcessor( ( AsyncOperation )current );
+            }
+            else if( current is WaitForSeconds )
+            {
+                throw new UnityYieldInstructionNotSupportedException( ( YieldInstruction )current, typeof( CoroutineSystemWaitForSeconds ) );
+            }
+            else if( current is YieldInstruction )
+            {
+                throw new UnityYieldInstructionNotSupportedException( ( YieldInstruction )current );
+            }
+            else if( current is ICoroutineProcessor )
+            {
+                throw new UsingCoroutineProcessorInYieldingException();
+            }
+
+            return res;
+        }
+        #endregion
+    }
 }

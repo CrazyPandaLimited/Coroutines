@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 
 namespace CrazyPanda.UnityCore.CoroutineSystem
@@ -18,18 +19,23 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// Invokes event on any errors in coroutines execution process
 		/// </summary>
 		event Action< object, Exception > OnError;
-		#endregion
+        #endregion
 
-		#region Public Members
-		/// <summary>
-		///  starts coroutine in near future, by adding it to execution queue
-		/// </summary>
-		/// <param name="target">object, where coroutine was initiated</param>
-		/// <param name="enumerator">coroutine to start</param>
-		/// <param name="handlerError">event, which is gonna call on any exception in coroutine execution process</param>
-		/// <param name="forcePutFirst">sets coroutine immediately as first priority for execution</param>
-		[CanBeNull]
-		ICoroutineProcessorPausable StartCoroutine( object target, IEnumerator enumerator, Action< object, Exception > handlerError = null, bool forcePutFirst = false );
+        #region Public Members
+        /// <summary>
+        ///  starts coroutine in near future, by adding it to execution queue
+        /// </summary>
+        /// <param name="target">object, where coroutine was initiated</param>
+        /// <param name="enumerator">coroutine to start</param>
+        /// <param name="handlerError">event, which is gonna call on any exception in coroutine execution process</param>
+        /// <param name="forcePutFirst">sets coroutine immediately as first priority for execution</param>
+        /// <param name="customCoroutinesProcessorFactory">factories for custom coroutines processors</param>
+        [CanBeNull]
+		ICoroutineProcessorPausable StartCoroutine( object target, 
+            IEnumerator enumerator, 
+            Action< object, Exception > handlerError = null, 
+            bool forcePutFirst = false);
+
 		/// <summary>
 		///  Starts coroutine before any another coroutine
 		/// </summary>

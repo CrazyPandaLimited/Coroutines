@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace CrazyPanda.UnityCore.CoroutineSystem
 {
@@ -12,7 +12,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// <summary>
 		/// Provides exception, happened during coroutine execution process
 		/// </summary>
-		Exception Exception { get; }
+		Exception Exception { get; set; }
 		#endregion
 
 		#region Public Members
@@ -42,6 +42,8 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// Continues coroutine execution process
 		/// </summary>
 		void Resume();
-		#endregion
-	}
+
+        CoroutineState State { get; }
+        #endregion
+    }
 }
