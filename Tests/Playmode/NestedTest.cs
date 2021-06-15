@@ -9,11 +9,8 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
     [NUnit.Framework.Category("LocalTests")]
 	class NestedTest
 	{
-		#region Private Fields
 		private int[ ] _flags = new int[ 4 ];
-		#endregion
 
-		#region Public Members
 		[ Test ]
 		public void Test()
 		{
@@ -60,9 +57,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 			 }, _flags );
 			Assert.IsTrue( coroutine.IsCompleted );
 		}
-		#endregion
 
-		#region Private Members
 		private IEnumerator ParentCoroutine()
 		{
 			_flags[ 0 ] = 1;
@@ -93,6 +88,5 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 			_flags[ 3 ]++;
 			yield break;
 		}
-		#endregion
 	}
 }

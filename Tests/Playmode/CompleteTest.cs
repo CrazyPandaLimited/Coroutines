@@ -10,11 +10,8 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
     [NUnit.Framework.Category("LocalTests")]
 	public class CompleteTest
 	{
-		#region Constants
 		private const uint STEPS_COUNT = 10;
-		#endregion
 
-		#region Public Members
 		[ Test ]
 		public void Test()
 		{
@@ -32,9 +29,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 
 			Assert.IsTrue( isCompleted );
 		}
-		#endregion
 
-		#region Private Members
 		private IEnumerator CompletableCoroutine()
 		{
 			for( var i = 0; i < STEPS_COUNT; i++ )
@@ -42,6 +37,5 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 				yield return null;
 			}
 		}
-		#endregion
 	}
 }

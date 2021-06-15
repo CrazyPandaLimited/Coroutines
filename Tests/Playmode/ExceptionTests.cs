@@ -10,7 +10,6 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
     [NUnit.Framework.Category("LocalTests")]
     public class ExceptionTests
     {
-        #region Public Members
         [ Test ]
         public void UnityYieldInstuctionNotSupportedWaitForSeconds()
         {
@@ -60,9 +59,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		    coroutineMgr.TimeProvider = timeProvider;
 			Assert.Throws< Exception >( () => coroutineMgr.StartCoroutine( this, CorrectProcessWhenError() ) );
 	    }
-        #endregion
 
-        #region Private Members
         private IEnumerator CorrectProcessWhenError()
         {
 			throw new Exception( "Test exeption" );
@@ -84,6 +81,5 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 	    {
 		    yield return Substitute.For<ICoroutineProcessor>(  );
 	    }
-        #endregion
     }
 }

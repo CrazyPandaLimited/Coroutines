@@ -9,13 +9,10 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
     [NUnit.Framework.Category("LocalTests")]
     public class StopTests
     {
-        #region Private Fields
         private bool _firstFlag;
         private bool _secondFlag;
         private bool _thirdFlag;
-        #endregion
 
-        #region Public Members
         [ Test ]
         public void StopAll()
         {
@@ -91,9 +88,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             Assert.IsTrue( _secondFlag );
             Assert.IsTrue( _thirdFlag );
         }
-        #endregion
 
-        #region Private Members
         private void ResetFlags()
         {
             _firstFlag = false;
@@ -118,6 +113,5 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             yield return null;
             _thirdFlag = true;
         }
-        #endregion
     }
 }

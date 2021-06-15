@@ -9,7 +9,6 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
     [NUnit.Framework.Category("LocalTests")]
     public class ControlCoroutineManagerInCoroutineItself
     {
-        #region Private Fields
         private bool _firstFlag;
         private int _secondFlag;
         private int _thirdFlag;
@@ -17,9 +16,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
         private CoroutineManager _coroutineManager;
 
         private object hook = new object();
-        #endregion
 
-        #region Public Members
         [ Test ]
         public void Test()
         {
@@ -39,9 +36,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             Assert.AreEqual( _secondFlag, 1 );
             Assert.AreEqual( _thirdFlag, 1 );
         }
-        #endregion
 
-        #region Private Members
         private IEnumerator AddEnumerator()
         {
             _coroutineManager.StartCoroutine( hook, SecondEnumerator() );
@@ -67,6 +62,5 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             yield return null;
             _thirdFlag = 10;
         }
-        #endregion
     }
 }

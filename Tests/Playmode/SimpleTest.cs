@@ -9,11 +9,8 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
     [NUnit.Framework.Category("LocalTests")]
 	public class SimpleTest
 	{
-		#region Private Fields
 		private bool _flag;
-		#endregion
 
-		#region Public Members
 		[ Test ]
 		public void Test()
 		{
@@ -24,15 +21,12 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 			timeProvider.OnUpdate += Raise.Event< Action >();
 			Assert.IsTrue( _flag );
 		}
-		#endregion
 
-		#region Private Members
 		private IEnumerator SimpleCoroutine()
 		{
 			_flag = true;
 			yield break;
 		}
-		#endregion
 	}
 
 }

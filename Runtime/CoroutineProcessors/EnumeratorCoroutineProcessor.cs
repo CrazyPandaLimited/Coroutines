@@ -9,14 +9,11 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 	{
 		public Exception Exception { get; set; }
 
-		#region Private Fields
 		private ITimeProvider _timeProvider;
 		private ICoroutineProcessor _innerCoroutineProcessor;
 		private CoroutineState _state;
 		private IEnumerator _enumerator;
-		#endregion
 
-		#region Properties
 		/// <summary>
 		/// Returns current coroutine execution process state
 		/// </summary>
@@ -46,25 +43,19 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		public bool IsCompleted { get { return _state == CoroutineState.Completed || _state == CoroutineState.Stopped; } }
 
 		public event Action< ICoroutineProcessor > OnComplete;
-		#endregion
 
-		#region Events
 		/// <summary>
 		/// Event, which is gonna invoke after every coroutine execution process state changes
 		/// </summary>
 		public event Action< CoroutineState > OnStateChange;
-		#endregion
 
-		#region Constructors
 		public EnumeratorCoroutineProcessor( ITimeProvider timeProvider, IEnumerator enumerator)
 		{
 			_timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
 			_enumerator = enumerator ?? throw new ArgumentNullException(nameof(enumerator));
             _state = CoroutineState.NotStarted;
 		}
-		#endregion
 
-		#region Public Members
 		/// <summary>
 		/// Suspends coroutine execution process
 		/// </summary>
@@ -194,6 +185,5 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 
             return res;
         }
-        #endregion
     }
 }

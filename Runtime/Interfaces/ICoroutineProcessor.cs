@@ -4,7 +4,6 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 {
 	public interface ICoroutineProcessor
 	{
-		#region Properties
 		/// <summary>
 		/// Returns completed coroutine execution process, or not
 		/// </summary>
@@ -13,9 +12,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// Provides exception, happened during coroutine execution process
 		/// </summary>
 		Exception Exception { get; set; }
-		#endregion
 
-		#region Public Members
 		/// <summary>
 		/// Event, which is gonna invoke on coroutine execution process ending
 		/// </summary>
@@ -28,12 +25,10 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// Stops coroutine execution process immediately
 		/// </summary>
 		void Stop();
-		#endregion
 	}
 
 	public interface ICoroutineProcessorPausable : ICoroutineProcessor
 	{
-		#region Public Members
 		/// <summary>
 		/// Suspends coroutine execution process
 		/// </summary>
@@ -44,6 +39,5 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		void Resume();
 
         CoroutineState State { get; }
-        #endregion
     }
 }

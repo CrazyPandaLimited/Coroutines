@@ -5,15 +5,10 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 {
 	public class MonoBehaviourTimeProvider : MonoBehaviour, ITimeProvider
 	{
-		#region Constants
 		protected const string Name = "-MonoBehaviourTimeProvider";
-		#endregion
 
-		#region Private Fields
 		private static MonoBehaviourTimeProvider _instance;
-		#endregion
 
-		#region Properties
 		/// <summary>
 		/// Creates or returns MonoBehaviourTimeProvider single instance
 		/// </summary>
@@ -43,9 +38,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		{
 			get { return Time.deltaTime; }
 		}
-		#endregion
 
-		#region Events
 		/// <summary>
 		/// Event, which invokes on any error happened during updated time tick process
 		/// </summary>
@@ -54,9 +47,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// Event, which invokes on every tick updated
 		/// </summary>
 		public event Action OnUpdate;
-		#endregion
 
-		#region Public Members
 		/// <summary>
 		/// Updates time tick
 		/// </summary>
@@ -81,6 +72,5 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 				}
 			}
 		}
-		#endregion
 	}
 }

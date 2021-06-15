@@ -5,12 +5,9 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 {
 	public class AsyncOperationProcessor : ICoroutineProcessor
 	{
-		#region Private Fields
 		private readonly AsyncOperation _asyncOperation;
 		private bool _isComplete;
-		#endregion
 
-		#region Properties
 		public bool IsCompleted
 		{
 			get
@@ -27,13 +24,9 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 			}
 		}
 		public Exception Exception { get; set; }
-		#endregion
 
-		#region Events
 		public event Action< ICoroutineProcessor > OnComplete;
-		#endregion
 
-		#region Constructors
 		public AsyncOperationProcessor( AsyncOperation asyncOperation )
 		{
 			_asyncOperation = asyncOperation ?? throw new ArgumentNullException(nameof(asyncOperation));
@@ -43,9 +36,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 				OnComplete( this );
 			}
 		}
-		#endregion
 
-		#region Public Members
 		public void Update()
 		{
 		}
@@ -53,6 +44,5 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		public void Stop()
 		{
 		}
-		#endregion
 	}
 }

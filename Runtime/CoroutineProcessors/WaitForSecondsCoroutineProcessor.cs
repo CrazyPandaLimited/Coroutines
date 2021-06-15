@@ -6,12 +6,9 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
     class WaitForSecondsCoroutineProcessor : ICoroutineProcessor
     {
 	    public Exception Exception { get; set; }
-		#region Private Fields
 		private double _currentTimer;
         private ITimeProvider _timeProvider;
-        #endregion
 
-        #region Properties
         public bool IsCompleted
         {
 	        get
@@ -26,17 +23,13 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
         }
 
 	    public event Action< ICoroutineProcessor > OnComplete;
-	    #endregion
 
-        #region Constructors
         public WaitForSecondsCoroutineProcessor( ITimeProvider timeProvider, double timer )
         {
             _timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
             _currentTimer = timer;
         }
-        #endregion
 
-        #region Public Members
         public void Update()
         {
             _currentTimer -= _timeProvider.deltaTime;
@@ -45,6 +38,5 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
         public void Stop()
         {
         }
-        #endregion
     }
 }

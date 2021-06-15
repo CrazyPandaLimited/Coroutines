@@ -9,11 +9,8 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
     [NUnit.Framework.Category("LocalTests")]
     public class IgnoreTest
     {
-        #region Private Fields
         private bool _flag;
-        #endregion
 
-        #region Public Members
         [ Test ]
         public void Test()
         {
@@ -28,9 +25,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             }
             Assert.IsTrue( _flag );
         }
-        #endregion
 
-        #region Private Members
         private IEnumerator IgnoreCoroutine()
         {
             yield return null;
@@ -50,6 +45,5 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             yield return new object(); // 15
             _flag = true;
         }
-        #endregion
     }
 }

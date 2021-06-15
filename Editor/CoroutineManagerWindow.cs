@@ -6,7 +6,6 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
     public class CoroutineManagerWindow : EditorWindow
     {
         private static GUIStyle _style;
-        #region Public Members
         [ MenuItem( "UnityCore/Coroutines system/Coroutine Manager View" ) ]
         public static void ShowWindow()
         {
@@ -55,6 +54,5 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 
             Repaint();
         }
-        #endregion
     }
 }

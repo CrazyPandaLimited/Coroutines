@@ -9,14 +9,11 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
     [NUnit.Framework.Category("LocalTests")]
     public class WaitTest
     {
-        #region Private Fields
         private bool _flag1;
         private bool _flag2;
         private bool _flag3;
         private bool _flag4;
-        #endregion
 
-        #region Public Members
         [ Test ]
         public void Test()
         {
@@ -51,9 +48,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             Assert.IsTrue( _flag4 );
             
         }
-        #endregion
 
-        #region Private Members
         private IEnumerator WaitCoroutine()
         {
             yield return new CoroutineSystemWaitForSeconds( 1.0f );
@@ -65,6 +60,5 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             yield return new CoroutineSystemWaitForSeconds( 1.0f );
             _flag4 = true;
         }
-        #endregion
     }
 }

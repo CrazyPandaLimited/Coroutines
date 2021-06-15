@@ -9,11 +9,8 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
     [NUnit.Framework.Category("LocalTests")]
     public class CoroutineStateTests
     {
-#region Private Fields
         private int _count;
-#endregion
 
-#region Public Members
         [ Test ]
         public void Test() => CoroutineRunTest( new CoroutineManager() );
         public void CoroutineRunTest(ICoroutineManager coroutineMgr)
@@ -49,9 +46,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             Assert.IsTrue( coroutine.IsCompleted );
         }
 
-#endregion
 
-#region Private Members
         private IEnumerator InterruptableCoroutine()
         {
             _count += 1;
@@ -60,6 +55,5 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             yield return null;
             _count += 100000;
         }
-#endregion
     }
 }

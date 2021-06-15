@@ -5,13 +5,10 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 {
     public class UnityYieldInstructionNotSupportedException : Exception
     {
-        #region Properties
         public YieldInstruction Instruction { get; }
 
         private const string ExceptionMsg = "Coroutine manager doesn't support: {0}. Use Panda analogue {1}";
-        #endregion
 
-        #region Constructors
         public UnityYieldInstructionNotSupportedException( YieldInstruction instruction ) : base( String.Format( ExceptionMsg, instruction.GetType().FullName, null ) )
         {
             Instruction = instruction ?? throw new ArgumentNullException(nameof(instruction));
@@ -31,7 +28,6 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
         {
             Instruction = instruction ?? throw new ArgumentNullException(nameof(instruction));
         }
-        #endregion
     }
 
 }

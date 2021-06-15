@@ -9,7 +9,6 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
     [NUnit.Framework.Category("LocalTests")]
     public class StartCoroutineTests
     {
-        #region Public Members
         [ Test ]
         public void NullParameters()
         {
@@ -53,13 +52,10 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             timeProvider.OnUpdate += Raise.Event< Action >();
             Assert.DoesNotThrow( () => coroutineMgr.StartCoroutine( this, enumerator ) );
         }
-        #endregion
 
-        #region Private Members
         private IEnumerator SimpleCoroutine()
         {
             yield break;
         }
-        #endregion
     }
 }

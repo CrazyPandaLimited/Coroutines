@@ -7,12 +7,9 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 {
     public class CoroutineManager : ICoroutineManager
     {
-        #region Private Fields
         private LinkedList<Entry> _coroutines;
         private ITimeProvider _timeProvider;
-        #endregion
 
-        #region Properties
         /// <summary>
         /// Sets or returns custom time provider
         /// </summary>
@@ -34,16 +31,12 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
                 }
             }
         }
-        #endregion
 
-        #region Events
         /// <summary>
         /// Invokes event on any errors in coroutines execution process
         /// </summary>
         public event Action<object, Exception> OnError;
-        #endregion
 
-        #region Constructors
         public CoroutineManager()
         {
 #if UNITY_EDITOR
@@ -51,9 +44,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 #endif
             _coroutines = new LinkedList<Entry>();
         }
-        #endregion
 
-        #region Public Members
         /// <summary>
         ///  starts coroutine in near future, by adding it to execution queue
         /// </summary>
@@ -192,7 +183,6 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
                 coroutine.CoroutineProcessor.Stop();
             }
         }
-        #endregion
 
         /// <summary>
         /// Stops all coroutines and clears all data
@@ -204,7 +194,6 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             StopAllCoroutines();
         }
 
-        #region Private Members
         protected virtual ICoroutineProcessorPausable CreateEnumeratorCoroutine( IEnumerator enumerator )
         {
             if( enumerator == null )
@@ -294,9 +283,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
                 throw new ArgumentNullException( nameof( target ) );
             }
         }
-
-        #endregion
-
+        
 #if UNITY_EDITOR
 
         // нужен инстанс, чтобы отобразить редактор
@@ -311,12 +298,9 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 
         public class Entry
         {
-            #region Private Fields
             private WeakReference _targetReference;
             private bool _isUnityObject;
-            #endregion
 
-            #region Properties
             /// <summary>
             /// Returns target, which tracks coroutine  
             /// </summary>
@@ -355,9 +339,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
             /// Returns current CoroutineProcessor, which controls coroutine execution process
             /// </summary>
             public ICoroutineProcessorPausable CoroutineProcessor { get; private set; }
-            #endregion
 
-            #region Constructors
             public Entry( object target, IEnumerator enumerator, ICoroutineProcessorPausable coroutineProcessor, Action<object, Exception> handlerError )
             {
                 _isUnityObject = target is Object;
@@ -366,7 +348,6 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
                 CoroutineProcessor = coroutineProcessor ?? throw new ArgumentException( nameof( coroutineProcessor ) );
                 HandlerError = handlerError;
             }
-            #endregion
         }
 
 

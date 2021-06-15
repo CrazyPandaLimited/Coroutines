@@ -6,12 +6,9 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
     public class UnityCustomYieldCoroutineProcessor : ICoroutineProcessor
     {
 	    public Exception Exception { get; set; }
-		#region Private Fields
 		private CustomYieldInstruction _customInstruction;
 	    private bool _isComplete;
-        #endregion
 
-        #region Properties
         public bool IsCompleted
         {
 	        get
@@ -29,9 +26,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
         }
 
 	    public event Action< ICoroutineProcessor > OnComplete;
-	    #endregion
 
-        #region Constructors
         public UnityCustomYieldCoroutineProcessor( CustomYieldInstruction customInstruction )
         {
             _customInstruction = customInstruction ?? throw new ArgumentNullException(nameof(customInstruction));
@@ -41,9 +36,7 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 				OnComplete(this);
 			}
 		}
-        #endregion
 
-        #region Public Members
         public void Update()
         {
         }
@@ -51,6 +44,5 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
         public void Stop()
         {
         }
-        #endregion
     }
 }

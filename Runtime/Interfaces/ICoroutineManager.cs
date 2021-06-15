@@ -7,21 +7,16 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 {
 	public interface ICoroutineManager : IDisposable
 	{
-		#region Properties
 		/// <summary>
 		/// Sets or returns custom time provider
 		/// </summary>		
 		ITimeProvider TimeProvider { get; set; }
-		#endregion
 
-		#region Events
 		/// <summary>
 		/// Invokes event on any errors in coroutines execution process
 		/// </summary>
 		event Action< object, Exception > OnError;
-        #endregion
 
-        #region Public Members
         /// <summary>
         ///  starts coroutine in near future, by adding it to execution queue
         /// </summary>
@@ -70,6 +65,5 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 		/// Stops all coroutines
 		/// </summary>
 		void StopAllCoroutines();
-		#endregion
 	}
 }
