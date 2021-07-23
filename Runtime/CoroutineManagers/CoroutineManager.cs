@@ -7,8 +7,8 @@ namespace CrazyPanda.UnityCore.CoroutineSystem
 {
     public class CoroutineManager : ICoroutineManager
     {
-        private LinkedList<Entry> _coroutines;
-        private ITimeProvider _timeProvider;
+        protected LinkedList<Entry> _coroutines;
+        protected ITimeProvider _timeProvider;
 
         /// <summary>
         /// Sets or returns custom time provider
