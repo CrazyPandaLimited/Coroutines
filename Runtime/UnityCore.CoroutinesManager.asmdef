@@ -1,0 +1,14 @@
+{
+    "name": "UnityCore.CoroutinesManager",
+    "references": [
+        "GUID:10677ad47b54d41cfbb7e82ba461cc54"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "noEngineReferences": false
+}
