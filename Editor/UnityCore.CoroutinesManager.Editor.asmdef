@@ -1,0 +1,16 @@
+{
+    "name": "UnityCore.CoroutinesManager.Editor",
+    "references": [
+        "UnityCore.CoroutinesManager"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "noEngineReferences": false
+}
