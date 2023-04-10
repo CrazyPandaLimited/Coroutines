@@ -6,8 +6,6 @@ using NUnit.Framework;
 
 namespace CrazyPanda.UnityCore.CoroutineSystem
 {
-    [NUnit.Framework.Category("IntegrationTests")]
-    [NUnit.Framework.Category("LocalTests")]
 	public class CompleteTest
 	{
 		private const uint STEPS_COUNT = 10;

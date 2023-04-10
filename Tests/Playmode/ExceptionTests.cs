@@ -6,8 +6,6 @@ using UnityEngine;
 
 namespace CrazyPanda.UnityCore.CoroutineSystem
 {
-    [NUnit.Framework.Category("IntegrationTests")]
-    [NUnit.Framework.Category("LocalTests")]
     public class ExceptionTests
     {
         [ Test ]

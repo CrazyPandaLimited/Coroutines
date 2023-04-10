@@ -5,8 +5,6 @@ using NUnit.Framework;
 
 namespace CrazyPanda.UnityCore.CoroutineSystem
 {
-    [NUnit.Framework.Category("IntegrationTests")]
-    [NUnit.Framework.Category("LocalTests")]
     public class WaitTest
     {
         private bool _flag1;

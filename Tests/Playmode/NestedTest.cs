@@ -5,8 +5,6 @@ using NUnit.Framework;
 
 namespace CrazyPanda.UnityCore.CoroutineSystem
 {
-    [NUnit.Framework.Category("IntegrationTests")]
-    [NUnit.Framework.Category("LocalTests")]
 	class NestedTest
 	{
 		private int[ ] _flags = new int[ 4 ];
